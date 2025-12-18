@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main(){
+double vi, vf, a, t;
+cout << "Enter your Initial velocity: ";
+cin>>vi;
+cout << "Enter your final velocity: ";
+cin>>vf;
+cout << "Enter your acceleration : ";
+cin>>a;
+cout << "Enter your time : ";
+cin>>t;
+
+
+double s = (vi*t)+(a*pow(t,2))/2;
+
+cout<<"The Distance is "<<s<<endl;
+
+return 0;
+}
