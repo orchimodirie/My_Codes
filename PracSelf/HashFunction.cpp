@@ -44,4 +44,4 @@ int main() {
     std::cout << "Input: " << input2 << " | Hash: " << hash2 << std::endl;
 
     return 0;
-} 
+}

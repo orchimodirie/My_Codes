@@ -12,7 +12,7 @@ int main(){
     for(int i = 0; n > i; i++){
         std::cin>>primes[i];
     }
-
+    std::cout<<"enter the target: ";
     std::cin>>targ;
 
     for(int i = 0; n>i; i++){
@@ -26,7 +26,7 @@ int main(){
 
     }
     if (indx != -1)
-        std::cout<<indx<<std::endl;
+        std::cout<<"The index of target is "<<indx<<std::endl;
     else
         std::cout<<"-1"<<std::endl;
 }
