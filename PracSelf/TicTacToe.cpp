@@ -24,10 +24,6 @@ void BoardGame(const vector<vector<char>> &tiles)
 }
 void tiles(vector<vector<char>> &tilesData, int coord, char &pamato)
 {
-    if (pamato == 'O')
-        pamato = 'X';
-    else
-        pamato = 'O';
 
     int col = (coord - 1) % 3;
     int row = (coord - 1) / 3;
@@ -71,27 +67,37 @@ bool gameChecker(const vector<vector<char>> &tilesData, bool &gamewinner)
     return false;
 }
 
-void tileschecker(const vector<vector<char>> &tiles, int &coord)
+int getValidInput(const vector<vector<char>> &tiles)
 {
-
-    while (true)
+    int coord;
+    while (true) // Loop forever until we return
     {
+        // 1. Ask for input FIRST
+        cout << "Enter coordinate: "; 
+        cin >> coord;
 
+        // 2. Check Range
+        if (coord < 1 || coord > 9)
+        {
+            cout << "Invalid! Please enter 1-9 only.\n";
+            continue; // Go back to top
+        }
+
+        // 3. Check Availability
         int col = (coord - 1) % 3;
         int row = (coord - 1) / 3;
 
-        if (tiles[row][col] == 'X' || tiles[row][col] == 'O')
+        if (tiles[row][col] != ' ')
         {
-            cout << "Try different tiles: ";
-            cin >> coord;
+            cout << "Spot taken! ";
+            // Don't ask for input here, just 'continue' to let the top of the loop handle it
+            continue; 
         }
-        else
-        {
-            break;
-        }
+
+        // 4. If we survived, break the loop
+        return coord;
     }
 }
-
 int main()
 {
     bool gameWinner = false;
@@ -102,33 +108,38 @@ int main()
         {' ', ' ', ' '},
 
     };
-    char pamato = 'O';
-    int coord;
+    char pamato = 'X';
     int loopcounter = 0;
+
+
+
+
 
     while (!(gameChecker(tilesData, gameWinner)) && loopcounter != 9)
     {
+
         system("cls");
 
+        // shows the board
         BoardGame(tilesData);
-        cout << "Enter the coordinates: ";
 
-        // constraint inputs
-        cin >> coord;
+        // placemarkers, this put marker to proper tiles
+        tiles(tilesData, getValidInput(tilesData), pamato);
 
-        if (coord < 1 || coord > 9)
-        {
-            cout << "Invalid coordinate! Enter 1-9 "<<endl;
-            system("pause");
-            continue; // Restart the loop immediately
-        }
+        if (pamato == 'X')
+            pamato = 'O';
+        else
+            pamato = 'X';
 
-        tileschecker(tilesData, coord);
-        tiles(tilesData, coord, pamato);
         loopcounter++;
     }
     system("cls");
     BoardGame(tilesData);
+
+    if (pamato == 'X')
+        pamato = 'O';
+    else
+        pamato = 'X';
 
     if (gameWinner == true)
     {
