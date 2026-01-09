@@ -21,15 +21,10 @@ void bookroom(accountDetails &acc)
 {
     system("cls");
     // first choose a room
-
     // assigned price point for each room
-
     // check how many nights
-
     // calcute nights x selected room
-
     // acct balance - total cost
-
     // if okay then update the account details (struct)
 
     string roomchoice;
@@ -38,45 +33,67 @@ void bookroom(accountDetails &acc)
     double priceRoom;
     int nights;
 
-   
-        cout << "Choose your Room Type: " << endl;
+    cout << "Choose your Room Type: " << endl;
 
-        // first pili tayo ng options here
-        cout << "-> Single" << endl;
-        cout << "-> Double" << endl;
-        cout << "-> Suite" << endl;
+    // first pili tayo ng options here
+    cout << "-> Single" << endl;
+    cout << "-> Double" << endl;
+    cout << "-> Suite" << endl;
 
-        cout << "Enter the number of desired Room: ";
-        cin >> roomchoice;
+    cout << "Enter the number of desired Room: ";
+    cin >> roomchoice;
 
-        // dapat
+    /*
+    merong problem here since the input os string then what if the user capitalized certain character
+    or the input is all llowercase? because of that i plan to capitalize the input before checking
+    */
 
-        if (roomchoice == "Single" || roomchoice == "single")
+    for (char &c : roomchoice)
+    {
+        c = toupper(c);
+    }
+
+    if (roomchoice == "SINGLE")
+    {
+        selectedroom = "Single";
+        priceRoom = 100.0;
+    }
+    else if (roomchoice == "DOUBLE")
+    {
+        selectedroom = "Double";
+        priceRoom = 150.0;
+    }
+    else if (roomchoice == "SUITE")
+    {
+        selectedroom = "Suite";
+        priceRoom = 250.0;
+    }
+    else
+    {
+        cout << "\nInvalid room Type!" << endl;
+        cout << "Try valid room!" << endl;
+        return;
+    }
+    /*
+     I implement this looping structure here to check the input for the night. Imagine the user input zero or any negative number
+    it would successfully book the room with zero cost or negative amount. That is not good cuz that doesnt happen in real life
+    */
+    bool loopControl = true;
+    while (loopControl)
+    {
+
+        cout << "How many nights?: ";
+        cin >> nights;
+
+        if (nights > 0)
         {
-            selectedroom = "Single";
-            priceRoom = 100.0;
-
-        }
-        else if (roomchoice == "Double" || roomchoice == "double")
-        {
-            selectedroom = "Double";
-            priceRoom = 150.0;
-
-        }
-        else if (roomchoice == "Suite" || roomchoice == "suite")
-        {
-            selectedroom = "Suite";
-            priceRoom = 250.0;
+            loopControl = false;
         }
         else
         {
-            cout << "\nInvalid room Type!" << endl;
-            cout << "Try valid room!" << endl;
-            return;
+            cout << "Invalid number of night/s! Try Again (Input > 0)" << endl;
         }
-
-    cout << "How many nights?: ";
-    cin >> nights;
+    }
 
     double totalCost = priceRoom * nights;
 
@@ -91,20 +108,20 @@ void bookroom(accountDetails &acc)
         acc.totalCost = totalCost;
 
         cout << "\n=====================================" << endl;
-        cout<<fixed<<setprecision(2);
+        cout << fixed << setprecision(2);
         cout << "Booked " << selectedroom << " for " << nights << " nights." << " Cost: $" << totalCost << endl;
         cout << "Remaing Balance: $" << acc.balance << endl;
     }
-
     else
     {
-        cout << "Insufficient funds! Cannot book the room."<<endl;
+        cout << "Insufficient funds! Cannot book the room." << endl;
     }
 }
 
 void checkBalance(const accountDetails &acc)
 {
     system("cls");
+    cout << fixed << setprecision(2);
     cout << "\n=====================================" << endl;
     cout << "Current Balance: " << "$" << acc.balance << endl;
 }
@@ -112,6 +129,7 @@ void checkBalance(const accountDetails &acc)
 void viewDetails(const accountDetails &acc)
 {
     system("cls");
+    cout << fixed << setprecision(2);
     cout << "\n=== Booking and Payment Details ===" << endl;
     cout << "   Room type: " << acc.room << endl;
     cout << "   Total Cost: $" << acc.totalCost << endl;
@@ -128,11 +146,11 @@ int main()
 
     while (looper)
     {
-
+        // main interface
         system("cls");
 
         cout << "==============================================" << endl;
-        cout << "                 Welcome!                     " << endl;
+        cout << "              Welcome to the Hotel!           " << endl;
         cout << "==============================================" << endl;
         cout << " Choose Actions:    " << endl;
         cout << "  1. Book Room and Pay  " << endl;
@@ -147,31 +165,26 @@ int main()
         {
         case 1:
             bookroom(account);
-            looper = true;
             break;
-
         case 2:
             checkBalance(account);
-            looper = true;
             break;
-
         case 3:
             viewDetails(account);
-            looper = true;
             break;
-
         case 4:
             cout << "\nExiting program..." << endl;
             looper = false;
             break;
 
         default:
-            cout << "\nInvalid choice! Exiting..." << endl;
-            looper = false;
+            cout << "\nInvalid choice! Try Again." << endl;
             break;
         }
 
-        system("pause");
+        // it exits directly if user choose 4 (does not wait)
+        if (choiceMenu != 4)
+            system("pause");
     }
 
     return 0;

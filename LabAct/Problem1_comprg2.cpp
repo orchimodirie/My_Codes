@@ -81,7 +81,7 @@ void bookRoom(account &acc)
         return;
     }
 
-    bool loopControl = true;
+    
 
     /* 
         why i have loop controL?
@@ -92,7 +92,7 @@ void bookRoom(account &acc)
         if yes then it normally does it's own job
         
     */
-
+    bool loopControl = true;
     while(loopControl){
 
     
@@ -222,9 +222,7 @@ int main()
             break;
         case 5:
             cout << "Exiting program..." <<endl;
-            loopControl = false;
             break;
-
         default:
             cout<<"Invalid Input! Try again"<<endl;
             break;
