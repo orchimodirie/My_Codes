@@ -1,3 +1,7 @@
+// problem 3 group MP1-3
+// Abenoja - programmed this part
+// Mayor
+// Gagarino
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -132,6 +136,7 @@ void viewDetails(const accountDetails &acc)
     cout << fixed << setprecision(2);
     cout << "\n=== Booking and Payment Details ===" << endl;
     cout << "   Room type: " << acc.room << endl;
+    cout << "   Number of nights: "<<acc.numNights<<endl;
     cout << "   Total Cost: $" << acc.totalCost << endl;
     cout << "   Remaining Balance: $" << acc.balance << endl;
 }

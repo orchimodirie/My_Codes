@@ -1,3 +1,7 @@
+// problem 1 group MP1-3
+// Abenoja
+// Mayor
+// Gagarino
 #include <iostream>
 #include <string>
 #include <cctype>
