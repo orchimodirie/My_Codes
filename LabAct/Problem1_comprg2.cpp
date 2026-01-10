@@ -225,6 +225,8 @@ int main()
             break;
         default:
             cout<<"Invalid Input! Try again"<<endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
             break;
         }
         
