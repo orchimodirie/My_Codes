@@ -183,6 +183,7 @@ int main()
             break;
 
         default:
+         //to avoid infinite loop
             cout << "\nInvalid choice! Try Again." << endl;
             cin.clear();
             cin.ignore(1000,'\n');

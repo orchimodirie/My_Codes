@@ -167,7 +167,7 @@ void totalCost(const account &acc)
 {
     system("cls");
     cout << "===========================" << endl;
-    cout << " Total cost: $" << acc.totalCost;
+    cout << " Total cost: $" << acc.totalCost<<endl;
 }
 
 void bookingDetails(const account &acc)
@@ -228,6 +228,7 @@ int main()
             cout << "Exiting program..." <<endl;
             break;
         default:
+        //to avoid infinite loop
             cout<<"Invalid Input! Try again"<<endl;
             cin.clear();
             cin.ignore(1000,'\n');

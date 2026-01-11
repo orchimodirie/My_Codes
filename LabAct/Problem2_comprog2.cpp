@@ -102,6 +102,7 @@ int  main (){
                 loopcontrol = false;
                 break;
             default:
+             //to avoid infinite loop
                 cout<<"Invalid input! Try again"<<endl;
                 cin.clear();
                 cin.ignore(1000, '\n');
