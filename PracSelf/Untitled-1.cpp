@@ -1,96 +1,160 @@
 #include <iostream>
-#include <cctype>
-#include <iomanip>
+#include <string>
+#include <cstdlib>
 using namespace std;
+/*
 
-string room() {
-    return "avaialble.";
+*/
+struct Car{
+    string plateNumber = "EMPTY";
+    string ownerName = "EMPTY";
+    int hoursParked = 0;
+    
+};
+
+// we need a function that looks what slot is empty
+void parkingStatus(const Car parkingSlot[]){
+    //linear search algorithm for 5 slot
+    // target is the word empty
+    system("cls");
+    //if the vector reach its end doesnt empty space, you should return no avaialbe space
+    string target = "EMPTY";
+
+    for(int i = 0; i <5; i++){
+       if(parkingSlot[i].plateNumber == target){
+        cout<<"The slot "<<i+1<<" is available"<<endl;
+       }
+       else{
+        cout<<"The slot "<<i+1<<" is occupied by "<<parkingSlot[i].plateNumber<<". (Owner: "<<parkingSlot[i].ownerName<<")"<<endl;
+       }
+    }
 }
 
-int main() {
-    string r = "", vil;
-    int nights = 0, sum = 0;
-    bool booked = false;
-    int choice;
-    double totalCost = 0;
-    double userinput;
+void parkCar(Car parkingSlot[]){
+    // the parks a car and th eprogram seach for vacancy
+    // if there is vacant space, it retrieve its details 
+    // if not, display parking lot is full
+    string plateNum;
+    string ownName;
+    int hours;
+    bool carFound = false;
+    system("cls");
 
-    do {
-        cout << "\n1. Check room availablity.\n";
-        cout << "2. Book a room.\n";
-        cout << "3. Calculate the total cost of the day.\n";
-        cout << "4. View booking details.\n";
-        cout << "5. Exit the program.\n";
-        cin >> choice;
+    // linear search for slot vacancy
+    for(int i = 0; i <5; i++){
+       if(parkingSlot[i].plateNumber == "EMPTY" ){
+            cout<<"The slot "<<i+1<<" is available"<<endl;
+            cout<<"Enter your name: ";
+            cin.ignore(); // catch the buffer
+            getline(cin, parkingSlot[i].ownerName);
 
-        switch (choice) {
-        case 1: {
-            cout << "1. Room type =";
-            cin >> r;
-            for (char& ch : r) ch = tolower(ch);
-            if (r == "single" || r == "double" || r == "suite") {
-                vil = room();
-                cout << "Room type " << r << " is " << room() << endl;
-            }
-            else {
-                cout << "Room " << r << " is " << "not available";
-            }break;
-        }
-        case 2: {
-            cout << "Room type =, Nights = ";
-            cin >> r >> nights;
+            cout<<"Enter your plate name: ";
+            cin>>parkingSlot[i].plateNumber;
+            
+            carFound = true;
+            break;
+       }
+       
+    }
 
-          
+    if(!carFound){
+        cout<<"No available parking space"<<endl;
+       }
+}
 
-            for (char& ch : r) ch = tolower(ch);
+void retrieveCar(Car parkingSlot[]){
+    string platenum;
+    int totalFee;
+    bool carFound = false;
 
-            cout << fixed << setprecision(2);
+    system("cls");
+    cout<<"Enter the car's plate number: "<<endl;
+    cin>>platenum;
 
-            if (r == "single") {
-                totalCost = nights * 100;
+    //check the platenum(target) using linear search
 
-                cout << setprecision(2) << "Booked " << r << " for " << nights << " nights. Cost $" << totalCost << endl;
-            }
-            else if (r == "double") {
-                totalCost = nights * 150;
+    for(int i = 0; i < 5 ; i++){
+        if(parkingSlot[i].plateNumber == platenum)
+        {
+            //calculate the total fee
+            
 
-                cout << "Booked " << r << " for " << nights << " nights. Cost $" << totalCost << endl;
-            }
-            else if (r == "suite") {
-                totalCost = nights * 250;
+            cout<<"Plate number "<<parkingSlot[i].plateNumber<<" has found."<<endl;
+            cout<<"How many hours parked?: ";
+            cin>>parkingSlot[i].hoursParked;
 
-                cout << "Booked " << r << " for " << nights << " nights. Cost $" << totalCost << endl; break;
+            totalFee = 2 * parkingSlot[i].hoursParked;
 
-            } break;
-        }
-        case 3: if (totalCost == 0) {
-            cout << "The total cost is not calculated yet."; break;
+            cout<<"Total cost: $"<<totalFee<<endl;
 
-        }
-              cout << "Enter Total cost after booking =";
-              cin >> userinput;
 
-              if (totalCost = userinput) {
-                  cout << "Total cost so far: $" << userinput << endl;
-              }
-              else {
-                  cout << "The amount does not match total cost.";
-              } break;
+            //reset values
+            parkingSlot[i].hoursParked = 0;
+            parkingSlot[i].plateNumber = "EMPTY";
+            parkingSlot[i].ownerName = "EMPTY";
 
-        case 4: {
-
-            cout << "\nRoom Type =, Number of Nights =, Total Cost= ";
-            cin >> r >> nights >> totalCost;
-            cout << "\n=== Booking Details ===\n";
-            cout << "Room Type = " << r << "\n|";
-            cout << "Number of Nights = " << nights << "\n";
-            cout << "Total Cost = &" << totalCost << "\n";
+            carFound = true;
             break;
         }
-        default:
-            cout << "\nExiting program...\n";
+    }
+    if(!carFound)
+        {
+            cout<<"No plate number "<<platenum<<" is found."<<endl;
         }
 
-    } while (choice != 5);
+    
+}
+
+
+
+int main(){
+    
+    Car parkingSlot [5]; // array of structure
+    int choice;
+
+    bool loopControl = true;
+    while (loopControl)
+    {
+    system("cls");
+    cout<<"=================================="<<endl;
+    cout<<"     Welcome to Parking Haven"<<endl;
+    cout<<"=================================="<<endl;
+    cout<<" [1] Park"<<endl;
+    cout<<" [2] Retrieve"<<endl;
+    cout<<" [3] Check Details"<<endl;
+    cout<<" [4] Exit"<<endl;
+    cout<<"Choose your Desired action: ";
+    cin>>choice;
+
+        switch (choice)
+        {
+            case 1:
+                parkCar(parkingSlot);
+                break;
+            case 2:
+                // retrieve a car
+                retrieveCar(parkingSlot);
+                break;
+            case 3:
+                parkingStatus(parkingSlot);
+                break;
+            case 4:
+                cout<<"Exiting..."<<endl;
+                loopControl = false;
+                break;
+            default:
+                cout<<"Wrong Input! Try Again."<<endl;
+                cin.clear();
+                cin.ignore(100, '\n');
+                break;
+        }
+        if(choice != 4)
+            system("pause");
+    }
+    
+  
+
+
     return 0;
+
 }

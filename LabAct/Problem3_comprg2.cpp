@@ -21,6 +21,12 @@ struct accountDetails
     double totalCost = 0.0;
 };
 
+void toLowerCase(string str){
+    for(char& c: str){
+        c = tolower(c);
+    }
+}
+
 void bookroom(accountDetails &acc)
 {
     system("cls");
@@ -37,53 +43,40 @@ void bookroom(accountDetails &acc)
     double priceRoom;
     int nights;
 
-    cout << "Choose your Room Type: " << endl;
-
+    cout << "=======================================" << endl;
+    cout << "              BOOK A ROOM" << endl;
+    cout << "=======================================" << endl;
     // first pili tayo ng options here
     cout << "-> Single" << endl;
     cout << "-> Double" << endl;
     cout << "-> Suite" << endl;
 
-    cout << "Enter the number of desired Room: ";
+    cout << "Enter the desired Room type: ";
     cin >> roomchoice;
 
-    /*
-    merong problem here since the input os string then what if the user capitalized certain character
-    or the input is all llowercase? because of that i plan to capitalize the input before checking
-    */
+    toLowerCase(roomchoice); // turn letter to small caps
 
-    for (char &c : roomchoice)
+    if (roomchoice == "single")
     {
-        c = toupper(c);
-    }
-
-    if (roomchoice == "SINGLE")
-    {
-        selectedroom = "Single";
         priceRoom = 100.0;
     }
-    else if (roomchoice == "DOUBLE")
+    else if (roomchoice == "double")
     {
-        selectedroom = "Double";
         priceRoom = 150.0;
     }
-    else if (roomchoice == "SUITE")
+    else if (roomchoice == "suite")
     {
-        selectedroom = "Suite";
         priceRoom = 250.0;
     }
     else
     {
-        cout << "\nInvalid room Type!" << endl;
-        cout << "Try valid room!" << endl;
+        cout<<"Room Type "<<roomchoice<<" is not avaialbe."<< endl;
         return;
     }
-    /*
-     I implement this looping structure here to check the input for the night. Imagine the user input zero or any negative number
-    it would successfully book the room with zero cost or negative amount. That is not good cuz that doesnt happen in real life
-    */
+        
+
     bool loopControl = true;
-    while (loopControl)
+    while (loopControl) // loop for input checking
     {
 
         cout << "How many nights?: ";
@@ -107,14 +100,16 @@ void bookroom(accountDetails &acc)
         acc.balance -= totalCost;
 
         // update the account
-        acc.room = selectedroom;
+        roomchoice[0] = toupper(roomchoice[0]);
+        acc.room = roomchoice;
         acc.numNights = nights;
         acc.totalCost = totalCost;
 
-        cout << "\n=====================================" << endl;
+        cout << "\n=======================================" << endl;
         cout << fixed << setprecision(2);
         cout << "Booked " << selectedroom << " for " << nights << " nights." << " Cost: $" << totalCost << endl;
         cout << "Remaing Balance: $" << acc.balance << endl;
+        cout << "=======================================" << endl;
     }
     else
     {
@@ -126,19 +121,28 @@ void checkBalance(const accountDetails &acc)
 {
     system("cls");
     cout << fixed << setprecision(2);
-    cout << "\n=====================================" << endl;
-    cout << "Current Balance: " << "$" << acc.balance << endl;
+    cout << "=====================================" << endl;
+    cout << " Current Balance:      $" << acc.balance << endl;
+    cout << "=====================================" << endl;
 }
 
 void viewDetails(const accountDetails &acc)
 {
     system("cls");
-    cout << fixed << setprecision(2);
-    cout << "\n=== Booking and Payment Details ===" << endl;
-    cout << "   Room type: " << acc.room << endl;
-    cout << "   Number of nights: "<<acc.numNights<<endl;
-    cout << "   Total Cost: $" << acc.totalCost << endl;
-    cout << "   Remaining Balance: $" << acc.balance << endl;
+
+    if(acc.room == "None"){
+        cout << "===========================" << endl;
+        cout << "       NO BOOKING YET "<<endl;
+        cout << "===========================" << endl;
+    }
+    else{
+        cout << fixed << setprecision(2);
+        cout << "\n=== Booking and Payment Details ===" << endl;
+        cout << "   Room type: " << acc.room << endl;
+        cout << "   Number of nights: "<<acc.numNights<<endl;
+        cout << "   Total Cost: $" << acc.totalCost << endl;
+        cout << "   Remaining Balance: $" << acc.balance << endl;
+    }
 }
 
 int main()

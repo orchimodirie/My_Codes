@@ -27,7 +27,7 @@ void parkingStatus(const vector<Car> &parkingSlot){
         cout<<"The slot "<<i+1<<" is available"<<endl;
        }
        else{
-        cout<<"The slot "<<i+1<<" is occupied"<<endl;
+        cout<<"The slot "<<i+1<<" is occupied by "<<parkingSlot[i].plateNumber<<". (Owner: "<<parkingSlot[i].ownerName<<")"<<endl;
        }
     };
 }
@@ -46,13 +46,11 @@ void parkCar(vector<Car> &parkingSlot){
        if(parkingSlot[i].plateNumber == "EMPTY" ){
             cout<<"The slot "<<i+1<<" is available"<<endl;
             cout<<"Enter your name: ";
-            cin>>parkingSlot[i].ownerName;
+            cin.ignore(); // catch the buffer
+            getline(cin, parkingSlot[i].ownerName);
 
             cout<<"Enter your plate name: ";
             cin>>parkingSlot[i].plateNumber;
-
-            cout<<"Enter number of hours: ";
-            cin>>parkingSlot[i].hoursParked;
             
             break;
        }
@@ -79,9 +77,14 @@ void retrieveCar(vector<Car> &parkingSlot){
         if(parkingSlot[i].plateNumber == platenum)
         {
             //calculate the total fee
-            totalFee = 2 * parkingSlot[i].hoursParked;
+            
 
             cout<<"Plate number "<<parkingSlot[i].plateNumber<<" has found."<<endl;
+            cout<<"How many hours parked?: ";
+            cin>>parkingSlot[i].hoursParked;
+
+            totalFee = 2 * parkingSlot[i].hoursParked;
+
             cout<<"Total cost: $"<<totalFee<<endl;
 
 
@@ -111,7 +114,7 @@ int choice;
         cout<<"The slot "<<i+1<<" is available"<<endl;
        }
        else{
-        cout<<"The slot "<<i+1<<" is occupied"<<endl;
+        cout<<"The slot "<<i+1<<" is occupied by "<<parkingSlot[i].plateNumber<<"(Owner: "<<parkingSlot[i].ownerName<<")"<<endl;
        }
     };
 
@@ -161,6 +164,7 @@ int main(){
                 break;
             case 4:
                 cout<<"Exiting..."<<endl;
+                loopControl = false;
                 break;
             default:
                 cout<<"Wrong Input! Try Again."<<endl;
@@ -168,7 +172,8 @@ int main(){
                 cin.ignore(100, '\n');
                 break;
         }
-        system("pause");
+        if(choice != 4)
+            system("pause");
     }
     
   
