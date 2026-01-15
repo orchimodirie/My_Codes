@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <cstring> // to get the length
 using namespace std;
 
 int main(){
@@ -25,7 +25,7 @@ int main(){
         }
         else{
             cout<<"Not palindrome"<<endl;
-            return 0;
+            return 0;  
         }
         cout<<"Palindrome"<<endl;
     }
