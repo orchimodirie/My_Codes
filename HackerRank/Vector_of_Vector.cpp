@@ -15,8 +15,8 @@ int k;
     for (int i = 0; i < n; i++)
         {
             
-                cin >> k;
-                vector<int> temp_row(k);
+            cin >> k;
+            vector<int> temp_row(k);
             
             for (int j = 0; j < k; j++)
             {

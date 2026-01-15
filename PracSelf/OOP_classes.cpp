@@ -12,7 +12,7 @@ class Inventroy {
         };
 
     private:
-        vector<string>* items; // pointer to a vector items
+        vector<string> *items; // pointer to a vector items
         int capacity; //Maximum o fnumber of items
 
     // data access
