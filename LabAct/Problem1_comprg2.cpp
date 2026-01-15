@@ -17,7 +17,7 @@ struct account
     double totalCost = 0.0;
 };
 
-void toLowerCase(string str){
+void toLowerCase(string& str){
     for(char& c: str){
         c = tolower(c);
     }
@@ -167,7 +167,7 @@ int main()
 {
     account account; // the account variable we're all booking details will be stored
 
-    // I use pass by reference for all the function
+    // We use pass by reference for all the function
 
     /* We are going to loop the menu options here until the user choose exit
         - while loop with boolean control variable

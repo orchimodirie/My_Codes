@@ -1,5 +1,5 @@
 // problem 3 group MP1-3
-// Abenoja - programmed this 
+// Abenoja - programmed this
 // Mayor
 // Gagarino
 #include <iostream>
@@ -21,8 +21,10 @@ struct accountDetails
     double totalCost = 0.0;
 };
 
-void toLowerCase(string str){
-    for(char& c: str){
+void toLowerCase(string& str)
+{
+    for (char &c : str)
+    {
         c = tolower(c);
     }
 }
@@ -70,10 +72,9 @@ void bookroom(accountDetails &acc)
     }
     else
     {
-        cout<<"Room Type "<<roomchoice<<" is not avaialbe."<< endl;
+        cout << "Room Type " << roomchoice << " is not avaialbe." << endl;
         return;
     }
-        
 
     bool loopControl = true;
     while (loopControl) // loop for input checking
@@ -130,16 +131,18 @@ void viewDetails(const accountDetails &acc)
 {
     system("cls");
 
-    if(acc.room == "None"){
+    if (acc.room == "None")
+    {
         cout << "===========================" << endl;
-        cout << "       NO BOOKING YET "<<endl;
+        cout << "       NO BOOKING YET " << endl;
         cout << "===========================" << endl;
     }
-    else{
+    else
+    {
         cout << fixed << setprecision(2);
         cout << "\n=== Booking and Payment Details ===" << endl;
         cout << "   Room type: " << acc.room << endl;
-        cout << "   Number of nights: "<<acc.numNights<<endl;
+        cout << "   Number of nights: " << acc.numNights << endl;
         cout << "   Total Cost: $" << acc.totalCost << endl;
         cout << "   Remaining Balance: $" << acc.balance << endl;
     }
@@ -187,10 +190,10 @@ int main()
             break;
 
         default:
-         //to avoid infinite loop
+            // to avoid infinite loop
             cout << "\nInvalid choice! Try Again." << endl;
             cin.clear();
-            cin.ignore(1000,'\n');
+            cin.ignore(1000, '\n');
             break;
         }
 
