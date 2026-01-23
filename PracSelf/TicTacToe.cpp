@@ -5,9 +5,8 @@
 using namespace std;
 
 void BoardGame(const vector<vector<char>> &tiles)
-{
-    // OPTIONAL: Clears the terminal so the board stays in one place
-    // Use "cls" for Windows, "clear" for Mac/Linux
+
+    // Clears the terminal so the board stays in one place
     system("cls");
 
     cout << "\n\n"; // Add top margin
@@ -22,8 +21,10 @@ void BoardGame(const vector<vector<char>> &tiles)
     cout << "\t\t     |     |     " << endl;
     cout << "\n\n"; // Add bottom margin
 }
+
 void tiles(vector<vector<char>> &tilesData, int coord, char &pamato)
 {
+   // placemarker, i use math equation to locate the coordinates of tiles
 
     int col = (coord - 1) % 3;
     int row = (coord - 1) / 3;
@@ -33,7 +34,7 @@ void tiles(vector<vector<char>> &tilesData, int coord, char &pamato)
 
 bool gameChecker(const vector<vector<char>> &tilesData, bool &gamewinner)
 {
-
+    // simple math property, symmety property
     // A == B == C --> A == B, B == C
     // the other equailty is to check for blank space cuz same black space means wins also
     if (tilesData[0][0] == tilesData[1][1] && tilesData[1][1] == tilesData[2][2] && tilesData[0][0] != ' ')
@@ -56,7 +57,8 @@ bool gameChecker(const vector<vector<char>> &tilesData, bool &gamewinner)
             gamewinner = true;
             return true;
         }
-
+        
+         //horizontal
         if (tilesData[0][i] == tilesData[1][i] && tilesData[1][i] == tilesData[2][i] && tilesData[0][i] != ' ')
         {
             gamewinner = true;
@@ -69,6 +71,7 @@ bool gameChecker(const vector<vector<char>> &tilesData, bool &gamewinner)
 
 int getValidInput(const vector<vector<char>> &tiles)
 {
+    // this function is taking input from the user
     int coord;
     while (true) // Loop forever until we return
     {
@@ -98,6 +101,14 @@ int getValidInput(const vector<vector<char>> &tiles)
         return coord;
     }
 }
+
+void pamatoInv(char &pamato){
+ if (pamato == 'X')
+            pamato = 'O';
+        else
+            pamato = 'X';
+}
+
 int main()
 {
     bool gameWinner = false;
@@ -126,20 +137,14 @@ int main()
         // placemarkers, this put marker to proper tiles
         tiles(tilesData, getValidInput(tilesData), pamato);
 
-        if (pamato == 'X')
-            pamato = 'O';
-        else
-            pamato = 'X';
+        pamatoInv(pamato);
 
         loopcounter++;
     }
     system("cls");
     BoardGame(tilesData);
 
-    if (pamato == 'X')
-        pamato = 'O';
-    else
-        pamato = 'X';
+    pamatoInv(pamato);
 
     if (gameWinner == true)
     {
