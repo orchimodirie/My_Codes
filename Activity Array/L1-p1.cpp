@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 int main(){
@@ -10,17 +9,21 @@ int main(){
         cin>>arrNum[i];
     }
 
+    // I use simple bubble sort algorithm
     for(int i = 0; i<9; i++){
         for(int j = 0; j<10-i-1; j++){
             if(arrNum[j]>arrNum[j+1]){
-                swap(arrNum[j], arrNum[j+1]);
+                int temp = arrNum[j];
+                arrNum[j] = arrNum[j+1];
+                arrNum[j+1] = temp;
+                
             }
         }
     }
 
     cout<<"Element value of array in ascending order"<<endl;
     for(int num: arrNum){
-        cout<<" "<<num;
+        cout<<num<<" ";
     }
 
     return 0;

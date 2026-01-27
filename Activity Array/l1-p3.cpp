@@ -14,11 +14,11 @@ int main(){
     }
 
     max = arrNum[0];
-    min = max;
-    max2 = arrNum[0];
-    min2 = max2;
-    //find the 
+    min = arrNum[0];
 
+    
+
+    //finding the largest value
     for(int i = 0; i<10; i++){
         if(max<arrNum[i]){
             max=arrNum[i];
@@ -28,16 +28,24 @@ int main(){
         }
     }
 
+    //default value for edge na 10s and 20s
+    max2 = min; //variable for second largest and lowest
+    min2 = max;
+
+    //look for the second largest value by linear searching (exclude the max in the search)
      for(int i = 0; i<10; i++){
         if(max2 < arrNum[i] && arrNum[i] != max ){
             max2 = arrNum[i];
         }
-        else if(min2 > arrNum[i] && arrNum[i] != min ){
+
+        if(min2 > arrNum[i] && arrNum[i] != min ){
             min2 = arrNum[i];
         }
     }
 
-    cout<<"First to the highest: "<<max<<endl;
+   
+
+    cout<<"\nFirst to the highest: "<<max<<endl;
     cout<<"Second to the highest: "<<max2<<endl;
     cout<<"First to the lowest: "<<min<<endl;
     cout<<"Second to the lowest: "<<min2<<endl;
