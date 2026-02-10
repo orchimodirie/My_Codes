@@ -5,7 +5,7 @@
 using namespace std;
 
 void BoardGame(const vector<vector<char>> &tiles)
-
+{
     // Clears the terminal so the board stays in one place
     system("cls");
 
