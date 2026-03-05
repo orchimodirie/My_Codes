@@ -1,42 +1,23 @@
+// Online C++ compiler to run C++ program online
 #include <iostream>
-#include <vector>
-#include <cstdlib>
+using namespace std;
 
-int main(){
-    int n, up;
-
-    do
+int main() {
+    int size;
+    cout<<"enter size: ";
+    cin>>size;
+    int *ptr = new int[size];
+    
+    cout<<"Populate"<<endl;
+    for(int i = 0; i<size; i++)
     {
-    system("cls");
-    std::cout<<"Size: ";
-    std::cin>>n;
-    if (!(n >= 1 && n <= 100))
-        std::cout<<"Try again (1 <= n <= 100)"<<std::endl;
-    else
-        break;
-    }while (!(n >= 1 && n <= 100));
-
-    std::vector<int>primes(n);
-    std::vector<int>arrDwn(n);
-
-    std::cout<<"Array elements: ";
-    for(int i = 0; n > i; i++){
-        std::cin>>primes[i];
+        ptr[i] = i + size;
     }
+    
+    cout<<"last element is "<<ptr[size - 1];
 
-    int left = 0;
-    int right = n-1;
-
-    while (left < right)
-    {
-        if (primes[left] != primes[right]){
-            std::cout<<"Not a palindrome"<<std::endl;
-            return 0;
-        }
-        left++;
-        right--; 
-    }
-
-    std::cout<<"Palindrome"<<std::endl;
+    delete [] ptr;
+    ptr = nullptr;
+    
     return 0;
 }

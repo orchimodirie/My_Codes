@@ -48,8 +48,6 @@ do {
 
  
      day = int (d);
-
-   
      
 
     if ( (day < 1 || day >  31 ) || (month == 2 && day > 29 ) || ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)) { // checekr for false
