@@ -1,0 +1,3 @@
+System ID: 101 | Status: Active
+System ID: 102 | Status: Offline
+System ID: 103 | Status: Active

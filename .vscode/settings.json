@@ -9,7 +9,8 @@
     "code-runner.saveAllFilesBeforeRun": true,
     "code-runner.executorMap": {
     "cpp": "Clear-Host; g++ -std=c++17 -O2 \"$fileName\" -o \"$fileNameWithoutExt.exe\"; if ($?) { ./\"$fileNameWithoutExt.exe\" }"
-  }
+  },
+  "C_Cpp.errorSquiggles": "enabled"
 
 }
 
